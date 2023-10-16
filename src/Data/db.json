@@ -1,0 +1,69 @@
+{
+    "bars": [
+      {
+        "id": 1,
+        "name": "Bar 1",
+        "description": "Descripción del Bar 1",
+        "logo": "https://img.freepik.com/vector-gratis/concepto-logotipo-pub-cerveza-vintage_225004-1226.jpg",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      {
+        "id": 2,
+        "name": "Bar 2",
+        "description": "Descripción del Bar 2",
+        "logo": "https://previews.123rf.com/images/soifer/soifer1803/soifer180300141/97672995-logotipo-del-bar-de-la-piscina-en-estilo-ne%C3%B3n-plantilla-de-dise%C3%B1o-de-letrero-de-ne%C3%B3n-para-bar-de.jpg",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      {
+        "id": 3,
+        "name": "Bar 3",
+        "description": "Descripción del Bar 3",
+        "logo": "https://img.freepik.com/vector-gratis/concepto-logotipo-pub-cerveza-vintage_225004-1226.jpg",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      {
+        "id": 4,
+        "name": "Bar 4",
+        "description": "Descripción del Bar 4",
+        "logo": "https://previews.123rf.com/images/soifer/soifer1803/soifer180300141/97672995-logotipo-del-bar-de-la-piscina-en-estilo-ne%C3%B3n-plantilla-de-dise%C3%B1o-de-letrero-de-ne%C3%B3n-para-bar-de.jpg",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      {
+        "id": 5,
+        "name": "Bar 5",
+        "description": "Descripción del Bar 5",
+        "logo": "https://img.freepik.com/vector-gratis/concepto-logotipo-pub-cerveza-vintage_225004-1226.jpg",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      {
+        "id": 6,
+        "name": "Bar 6",
+        "description": "Descripción del Bar 6",
+        "logo": "https://previews.123rf.com/images/soifer/soifer1803/soifer180300141/97672995-logotipo-del-bar-de-la-piscina-en-estilo-ne%C3%B3n-plantilla-de-dise%C3%B1o-de-letrero-de-ne%C3%B3n-para-bar-de.jpg",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      {
+        "id": 7,
+        "name": "Bar 7",
+        "description": "Descripción del Bar 7",
+        "logo": "https://img.freepik.com/vector-gratis/concepto-logotipo-pub-cerveza-vintage_225004-1226.jpg",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      {
+        "id": 8,
+        "name": "Bar 8",
+        "description": "Descripción del Bar 8",
+        "logo": "https://previews.123rf.com/images/soifer/soifer1803/soifer180300141/97672995-logotipo-del-bar-de-la-piscina-en-estilo-ne%C3%B3n-plantilla-de-dise%C3%B1o-de-letrero-de-ne%C3%B3n-para-bar-de.jpg",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      }
+    ]
+  }
+  

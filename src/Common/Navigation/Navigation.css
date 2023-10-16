@@ -1,0 +1,28 @@
+/* Estilos para los enlaces */
+.sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+  }
+  
+  .sections a {
+    display: block;
+    width: 100%;
+    padding: 8% 0;
+    border-bottom: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff; /* Color de texto predeterminado del botón */ 
+    transition: background-color 0.3s, color 0.3s; /* Transición para el efecto al pasar el mouse */
+  }
+  
+  .sections a:hover {
+    color: #9d85f5; /* Cambia el color del texto al pasar el mouse */
+  }
+  
+  /* Estilo para el enlace activo */
+  .sections a.active {
+    color: #9d85f5; /* Cambia el color de texto para el enlace activo */
+  }

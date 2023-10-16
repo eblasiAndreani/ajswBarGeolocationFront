@@ -1,0 +1,32 @@
+/* styles.css (o tu archivo de estilos preferido) */
+.custom-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2%;
+    margin: 5%;
+    text-align: center;
+    display: flex;
+    background-color: #f0ebeb;
+  }
+  
+  .custom-card img {
+    max-width: 20%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .card-content{
+    width: 100%;
+  }
+  
+  .card-content h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+  
+  .card-content p {
+    font-size: 1.5rem;
+    margin: 5px 0;
+  }
+  

@@ -1,0 +1,13 @@
+.pageBuscar {
+    text-align: center;
+    padding-top: 3%;
+    height: 100%;
+    width: 100%;  
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+  }
+
+  .pageBuscar button { 
+    margin-left: 5%;
+  }
