@@ -10,13 +10,13 @@ const Login = () => {
 
   const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    // Verificar si hay un token en localStorage al cargar el componente
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(JSON.parse(storedToken));
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Verificar si hay un token en localStorage al cargar el componente
+  //   const storedToken = localStorage.getItem("token");
+  //   if (storedToken) {
+  //     setToken(JSON.parse(storedToken));
+  //   }
+  // }, [token]);
 
   const handleLogin = async () => {
     try {
@@ -24,7 +24,8 @@ const Login = () => {
       const response = {
         data: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlYmxhc2kiLCJpc3MiOiJnZW9iYXIiLCJpZCI6MywiZXhwIjoxNjk4MjcyNjk2fQ.hyPcSRpMexa-Z-utsVAA_U6HRrvUqNw_xbMkTNnfysI",
       };
-      localStorage.setItem("token", JSON.stringify(response));
+      localStorage.setItem("token", response.data);
+      setToken(response.data);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -39,7 +40,7 @@ const Login = () => {
   };
 
   const name = () => {
-    const decodedToken = jwtDecode(token.data);
+    const decodedToken = jwtDecode(token);
     console.log(decodedToken);
     return decodedToken.sub;
   };
@@ -47,6 +48,7 @@ const Login = () => {
   const handleLogout = () => {
     // Elimina el token de localStorage
     localStorage.removeItem("token");
+    setToken(null);
   };
 
   return (
