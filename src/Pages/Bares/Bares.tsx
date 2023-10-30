@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import './Bares.css'
-import Title from '../../Common/Title/Title';
-import ServiceBar from '../../service/Bar/BarService';
-import BarList from './BarList';
+import React, { useEffect, useState } from "react";
+import "./Bares.css";
+import Title from "../../Common/Title/Title";
+import ServiceBar from "../../service/Bar/BarService";
+import BarList from "./BarList";
 
 const Bares = ({ updateBar }) => {
   const [bares, setBares] = useState([]);
@@ -13,19 +13,19 @@ const Bares = ({ updateBar }) => {
       try {
         const response = await ServiceBar.getAll();
         setBares(response.data);
-      } catch(error)  {
-        console.error('Error al realizar la llamada', error);
-      };
+      } catch (error) {
+        console.error("Error al realizar la llamada", error);
+      }
     };
     fetchData(); // Llama a la función fetchData para obtener los bares cuando el componente se monta
   }, []);
 
   return (
     <body>
-      <div className='pageBares'>
-          <Title text="Todos los bares" />
-          <BarList bares={bares} updateBar={updateBar}></BarList>
-        </div>
+      <div className="pageBares">
+        <Title text="Todos los bares" />
+        <BarList bares={bares} updateBar={updateBar}></BarList>
+      </div>
     </body>
   );
 };

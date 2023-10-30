@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const LocalizacionService = ({ lat, lng }) => {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     // Realiza la solicitud de geocodificación inversa cuando se monta el componente
@@ -10,14 +10,14 @@ const LocalizacionService = ({ lat, lng }) => {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        if (data.status === 'OK' && data.results.length > 0) {
+        if (data.status === "OK" && data.results.length > 0) {
           const result = data.results[0];
           const formattedAddress = result.formatted_address;
           setAddress(formattedAddress);
         }
       })
       .catch((error) => {
-        console.error('Error al realizar la geocodificación inversa', error);
+        console.error("Error al realizar la geocodificación inversa", error);
       });
   }, [lat, lng]);
 

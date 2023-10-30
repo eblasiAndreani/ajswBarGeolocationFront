@@ -1,22 +1,26 @@
-import React from 'react';
-import Aside from '../../Bar/Aside/Aside';
+import React from "react";
+import Aside from "../../Bar/Aside/Aside";
 
 const Home = ({ bar }) => {
   const itemsBuscaBar = [
-    { path: '/', label: 'BUSCAR' },
-    { path: '/bares', label: 'BARES' },
-    { path: '/nosotros', label: 'NOSOTROS' },
+    { path: "/", label: "BARES" },
+    { path: "/buscar", label: "BUSCAR" },
+    { path: "/login", label: "INGRESAR" },
   ];
 
   const itemsBar = [
-    { path: '/reserva', label: 'RESERVAR' },
-    { path: '/vertragos', label: 'VER TRAGOS' },
-    { path: '/volver', label: 'VOLVER' },
+    { path: "/reserva", label: "RESERVAR" },
+    { path: "/vertragos", label: "VER TRAGOS" },
+    { path: "/volver", label: "VOLVER" },
   ];
 
   return (
     <div>
-      <Aside title={bar.name} imageSrc={bar.logo} menuItems={bar.id === 0 ? itemsBuscaBar : itemsBar} />
+      <Aside
+        title={bar.name}
+        imageSrc={bar.logo}
+        menuItems={bar.id === 0 ? itemsBuscaBar : itemsBar}
+      />
     </div>
   );
 };

@@ -1,14 +1,14 @@
-import ServiceBase from "../ServiceBase";
-import { IBar } from "./types";
-import { IGetAllResponse } from "../types";
+import ServiceBase from '../ServiceBase';
+import { IBar } from './types';
+import { IGetAllResponse } from '../types';
 
 class BarService extends ServiceBase {
   constructor() {
-    super("http://localhost:3000/","bars");
+    super('http://localhost:3001/', 'bars');
   }
 
   getAll = async (): Promise<IGetAllResponse<IBar>> => {
-    const { data } = await this.client.get<IBar[]>("");
+    const { data } = await this.client.get<IBar[]>('');
 
     return { data: data, totalCount: data.length };
   };
@@ -19,7 +19,7 @@ class BarService extends ServiceBase {
     // y devolver la lista de bares que cumplan con esos criterios.
     // Ejemplo ficticio:
     //const response = await this.client.get<IBar[]>(`/search?lat=${latitude}&lon=${longitude}`);
-    const response = await this.client.get<IBar[]>("");
+    const response = await this.client.get<IBar[]>('');
     return response.data;
   };
 }
