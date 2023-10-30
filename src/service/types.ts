@@ -1,4 +1,4 @@
 export interface IGetAllResponse<T> {
-    data: T[];
-    totalCount: number;
-  }
+  data: T[];
+  totalCount: number;
+}

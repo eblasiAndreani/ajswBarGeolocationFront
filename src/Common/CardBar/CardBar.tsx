@@ -1,8 +1,7 @@
-import React from 'react';
-import './CardBar.css'
+import React from "react";
+import "./CardBar.css";
 
 const CardBar = ({ title, address, description, imageUrl, onClick }) => {
-
   const handleCardClick = () => {
     // Ejecuta la acción cuando se hace clic en la tarjeta
     if (onClick) {

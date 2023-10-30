@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "CommonJS",
-    "jsx": "react",  // Esto permite el uso de TSX para React
-    "outDir": "./dist",  // Directorio de salida para los archivos compilados
+    "jsx": "react", // Esto permite el uso de TSX para React
+    "outDir": "./dist", // Directorio de salida para los archivos compilados
     // Otras opciones de configuración
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*"]
 }
