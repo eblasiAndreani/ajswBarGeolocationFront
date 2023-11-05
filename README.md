@@ -3,6 +3,7 @@
 Para probar esta aplicación, sigue los pasos a continuación:
 
 1. **Obtención de Datos**
+
    - Asegúrate de que tengas [JSON Server](https://github.com/typicode/json-server) instalado en tu entorno de desarrollo. Si no lo tienes, puedes instalarlo globalmente ejecutando el siguiente comando:
 
      ```
@@ -14,12 +15,13 @@ Para probar esta aplicación, sigue los pasos a continuación:
    - Para obtener los datos necesarios, ejecuta el siguiente comando:
 
      ```
-     json-server --watch src/Data/db.json
+     json-server --watch src/Data/db.json --port 3001
      ```
 
    Esto iniciará un servidor JSON que proporcionará los datos simulados para la aplicación.
 
 2. **Levantar la Aplicación**
+
    - Una vez que el servidor JSON esté en funcionamiento, abre una nueva terminal.
 
    - Navega al directorio raíz de la aplicación si no lo has hecho ya.

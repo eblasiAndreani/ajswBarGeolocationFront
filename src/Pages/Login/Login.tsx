@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
+import ServiceLogin from "../../service/Login/LoginService";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,22 +11,19 @@ const Login = () => {
 
   const [token, setToken] = useState(null);
 
-  // useEffect(() => {
-  //   // Verificar si hay un token en localStorage al cargar el componente
-  //   const storedToken = localStorage.getItem("token");
-  //   if (storedToken) {
-  //     setToken(JSON.parse(storedToken));
-  //   }
-  // }, [token]);
-
   const handleLogin = async () => {
     try {
       //Aca debemos hcer la llamada al pos
-      const response = {
+      /* const response = {
         data: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlYmxhc2kiLCJpc3MiOiJnZW9iYXIiLCJpZCI6MywiZXhwIjoxNjk4MjcyNjk2fQ.hyPcSRpMexa-Z-utsVAA_U6HRrvUqNw_xbMkTNnfysI",
-      };
-      localStorage.setItem("token", response.data);
-      setToken(response.data);
+      }; */
+      const response = await ServiceLogin.autenticacion(
+        formData.username,
+        formData.password
+      );
+      console.log("Este es el reespone" + response);
+      localStorage.setItem("token", response);
+      setToken(response);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
