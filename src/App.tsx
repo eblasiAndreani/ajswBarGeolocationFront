@@ -9,7 +9,8 @@ import Bares from "./Pages/Bares/Bares";
 import Buscar from "./Pages/Buscar/Buscar";
 import Volver from "./Pages/Volver/Volver";
 import logo from "./Pages/Home/logo";
-import VerTragos from "./Pages/VerTragos/VerTragos";
+import VerTragos from "./Pages/VerPedido/VerPedido";
+import VerPedido from "./Pages/VerPedido/VerPedido";
 
 function App() {
   const barDefault = {
@@ -30,7 +31,7 @@ function App() {
         <Route path="/" element={<Bares updateBar={updateBar} />} />
         <Route path="/localizacion" element={<Localizacion />} />
         <Route path="/reserva" element={<Reserva />} />
-        <Route path="/vertragos" element={<VerTragos />} />
+        <Route path="/verpedido" element={<VerPedido />} />
         <Route path="/login" element={<Login />} />
         <Route path="/buscar" element={<Buscar updateBar={updateBar} />} />
         <Route

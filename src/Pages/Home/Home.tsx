@@ -10,7 +10,7 @@ const Home = ({ bar }) => {
 
   const itemsBar = [
     { path: "/reserva", label: "RESERVAR" },
-    { path: "/vertragos", label: "VER TRAGOS" },
+    { path: "/verpedido", label: "VER PEDIDOS" },
     { path: "/volver", label: "VOLVER" },
   ];
 

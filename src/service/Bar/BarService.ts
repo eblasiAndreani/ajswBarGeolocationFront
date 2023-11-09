@@ -1,17 +1,23 @@
-import ServiceBase from '../ServiceBase';
-import { IBar } from './types';
-import { IGetAllResponse } from '../types';
-import { IResponseClientGetAll } from '../IResponseClientGetAll';
+import ServiceBase from "../ServiceBase";
+import { IBar } from "./types";
+import { IGetAllResponse } from "../types";
+import { IResponseClientGetAll } from "../IResponseClientGetAll";
 
 class BarService extends ServiceBase {
   constructor() {
-    super('http://localhost:8080/', 'v1/gateway/bar/getAll');
+    //super('http://localhost:8080/', 'v1/gateway/bar/getAll');
+    super("http://localhost:3001/", "bars");
   }
 
-  getAll = async (): Promise<IGetAllResponse<IBar>> => {
-    const { data } = await this.client.get<IResponseClientGetAll<IBar>>('');
+  /* getAll = async (): Promise<IGetAllResponse<IBar>> => {
+    const { data } = await this.client.get<IResponseClientGetAll<IBar>>("");
 
-    return { data : data.body, totalCount: data.body.length };
+    return { data: data.body, totalCount: data.body.length };
+  }; */
+  getAll = async (): Promise<IGetAllResponse<IBar>> => {
+    const { data } = await this.client.get<IBar[]>("");
+
+    return { data: data, totalCount: data.length };
   };
 
   getBarsByLocation = async (latitude, longitude): Promise<IBar[]> => {
@@ -20,7 +26,7 @@ class BarService extends ServiceBase {
     // y devolver la lista de bares que cumplan con esos criterios.
     // Ejemplo ficticio:
     //const response = await this.client.get<IBar[]>(`/search?lat=${latitude}&lon=${longitude}`);
-    const response = await this.client.get<IBar[]>('');
+    const response = await this.client.get<IBar[]>("");
     return response.data;
   };
 }
