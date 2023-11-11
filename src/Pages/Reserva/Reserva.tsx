@@ -14,6 +14,7 @@ const Reserva = ({ Bar }) => {
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   // Estado para llevar un registro de la cantidad de cada bebida seleccionada
   const [drinkQuantities, setDrinkQuantities] = useState({});
+  const [idUser, setIdUser] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {

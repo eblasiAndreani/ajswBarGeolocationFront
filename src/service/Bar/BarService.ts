@@ -4,7 +4,7 @@ import { IBar } from "./types";
 class BarService extends ServiceBase {
   constructor() {
     //super('http://localhost:8080/', 'v1/gateway/bar/getAll');
-    super("http://localhost:8082", "/v1/barLocation/");
+    super("http://localhost:8080", "/v1/gateway/bar/");
   }
 
   /* getAll = async (): Promise<IGetAllResponse<IBar>> => {
