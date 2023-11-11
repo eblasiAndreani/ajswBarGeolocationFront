@@ -7,7 +7,7 @@ import DrinkCardList from "./DrinkCardList";
 import { Card, Accordion, Row, Container, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const Reserva = () => {
+const Reserva = ({ Bar }) => {
   const [tables, setTables] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
@@ -18,9 +18,9 @@ const Reserva = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseTables = await ServiceTable.getTableByBar(1);
-        const responseDrinks = await ServiceDrink.getDrinkByBar(1);
-        console.log("Este no me trae nada ", responseTables);
+        const responseTables = await ServiceTable.getTableByBar(Bar.id);
+        const responseDrinks = await ServiceDrink.getDrinkByBar(Bar.id);
+        console.log("Este no me trae nada ", Bar.id);
         setTables(responseTables);
         setDrinks(responseDrinks);
       } catch (error) {

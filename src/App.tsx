@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Bares updateBar={updateBar} />} />
         <Route path="/localizacion" element={<Localizacion />} />
-        <Route path="/reserva" element={<Reserva />} />
+        <Route path="/reserva" element={<Reserva Bar={bar} />} />
         <Route path="/verpedido" element={<VerPedido />} />
         <Route path="/login" element={<Login />} />
         <Route path="/buscar" element={<Buscar updateBar={updateBar} />} />
