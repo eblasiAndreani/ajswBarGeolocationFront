@@ -20,15 +20,16 @@ const Registrarse = ({ setRegistrar }) => {
   };
 
   const handleRegistrarse = async () => {
-    // Display the user's input in the console
-    console.log("User Input:", formData);
-    alert("Mira el console log");
     try {
       const response = await ServiceUser.autenticacion(formData);
     } catch (error) {
       console.error("Error al realizar la llamada", error);
     }
     setRegistrar(false);
+  };
+
+  const handleAtras = async () => {
+    window.history.back();
   };
 
   return (
@@ -100,6 +101,9 @@ const Registrarse = ({ setRegistrar }) => {
             <div className="d-flex justify-content-between">
               <Button variant="success" onClick={() => handleRegistrarse()}>
                 Registrarse
+              </Button>
+              <Button variant="success" onClick={() => handleAtras()}>
+                Atras
               </Button>
             </div>
           </Form>

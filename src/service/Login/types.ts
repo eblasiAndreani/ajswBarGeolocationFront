@@ -1,4 +1,7 @@
-export interface ILogin {
-  user: string;
-  pass: string;
+export interface IRespo {
+  body: IBody;
+}
+
+interface IBody {
+  jwt: string;
 }

@@ -10,17 +10,13 @@ const LoginPage = ({ setToken, setRegistrar }) => {
 
   const handleLogin = async () => {
     try {
-      //Aca debemos hcer la llamada al pos
-      /* const response = {
-            data: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlYmxhc2kiLCJpc3MiOiJnZW9iYXIiLCJpZCI6MywiZXhwIjoxNjk4MjcyNjk2fQ.hyPcSRpMexa-Z-utsVAA_U6HRrvUqNw_xbMkTNnfysI",
-          }; */
       const response = await ServiceLogin.autenticacion(
         formData.username,
         formData.password
       );
-      console.log("Este es el reespone" + response);
-      localStorage.setItem("token", response);
-      setToken(response);
+      const token = response.body.jwt.split(" ");
+      localStorage.setItem("token", token[1]);
+      setToken(token[1]);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -50,7 +46,8 @@ const LoginPage = ({ setToken, setRegistrar }) => {
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
               <Form.Label className="text-white">Ingresar E-Mail</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
+                name="username"
                 placeholder="name@example.com"
                 onChange={handleInputChange}
               />
@@ -59,8 +56,10 @@ const LoginPage = ({ setToken, setRegistrar }) => {
               </Form.Label>
               <Form.Control
                 type="password"
+                name="password"
                 id="inputPassword5"
                 aria-describedby="passwordHelpBlock"
+                onChange={handleInputChange}
               />
               <Form.Text id="passwordHelpBlock" muted>
                 Your password must be 8-20 characters long, contain letters and

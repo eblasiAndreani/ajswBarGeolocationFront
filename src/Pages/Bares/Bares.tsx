@@ -12,7 +12,7 @@ const Bares = ({ updateBar }) => {
     const fetchData = async () => {
       try {
         const response = await ServiceBar.getAll();
-        setBares(response.data);
+        setBares(response);
       } catch (error) {
         console.error("Error al realizar la llamada", error);
       }

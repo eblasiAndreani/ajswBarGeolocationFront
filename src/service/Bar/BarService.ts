@@ -1,12 +1,10 @@
 import ServiceBase from "../ServiceBase";
 import { IBar } from "./types";
-import { IGetAllResponse } from "../types";
-import { IResponseClientGetAll } from "../IResponseClientGetAll";
 
 class BarService extends ServiceBase {
   constructor() {
     //super('http://localhost:8080/', 'v1/gateway/bar/getAll');
-    super("http://localhost:3001/", "bars");
+    super("http://localhost:8082", "/v1/barLocation/");
   }
 
   /* getAll = async (): Promise<IGetAllResponse<IBar>> => {
@@ -14,10 +12,10 @@ class BarService extends ServiceBase {
 
     return { data: data.body, totalCount: data.body.length };
   }; */
-  getAll = async (): Promise<IGetAllResponse<IBar>> => {
-    const { data } = await this.client.get<IBar[]>("");
-
-    return { data: data, totalCount: data.length };
+  getAll = async (): Promise<IBar[]> => {
+    const { data } = await this.client.get<IBar[]>("getAll");
+    console.log("Esta es la data: ", data);
+    return data;
   };
 
   getBarsByLocation = async (latitude, longitude): Promise<IBar[]> => {

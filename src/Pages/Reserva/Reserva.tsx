@@ -20,6 +20,7 @@ const Reserva = () => {
       try {
         const responseTables = await ServiceTable.getTableByBar(1);
         const responseDrinks = await ServiceDrink.getDrinkByBar(1);
+        console.log("Este no me trae nada ", responseTables);
         setTables(responseTables);
         setDrinks(responseDrinks);
       } catch (error) {

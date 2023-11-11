@@ -15,18 +15,22 @@ const BarList = ({ bares, updateBar }) => {
 
   return (
     <div className="bar-list">
-      {bares.map((bar) => (
-        <CardBar
-          key={bar.id} // Asegúrate de tener una propiedad única en cada objeto bar (por ejemplo, "id")
-          title={bar.name}
-          address={
-            <LocalizacionService lat={bar.latitude} lng={bar.longitude} />
-          }
-          description={bar.description}
-          imageUrl={bar.logo}
-          onClick={() => handleClickOnCard(bar)}
-        />
-      ))}
+      {Array.isArray(bares.body) && bares.body.length > 0 ? (
+        bares.body.map((bar) => (
+          <CardBar
+            key={bar.id}
+            title={bar.name}
+            address={
+              <LocalizacionService lat={bar.latitude} lng={bar.longitude} />
+            }
+            description={bar.description}
+            imageUrl={bar.logo}
+            onClick={() => handleClickOnCard(bar)}
+          />
+        ))
+      ) : (
+        <p>No hay bares disponibles.</p>
+      )}
     </div>
   );
 };

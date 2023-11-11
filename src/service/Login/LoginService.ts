@@ -1,13 +1,16 @@
 import ServiceBase from "../ServiceBase";
-import { ILogin } from "./types";
+import { IRespo } from "./types";
 
 class LoginService extends ServiceBase {
   constructor() {
-    super("http://localhost:8080/", "v1/user/getById/{id}");
+    super("http://localhost:8080/", "v1/login");
   }
 
-  autenticacion = async (user, pass): Promise<string> => {
-    const { data } = await this.client.post<string>("", 1);
+  autenticacion = async (user, pass): Promise<IRespo> => {
+    const { data } = await this.client.post<IRespo>("", {
+      user,
+      pass,
+    });
     return data;
   };
 }

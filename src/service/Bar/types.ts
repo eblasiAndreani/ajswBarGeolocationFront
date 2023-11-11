@@ -1,4 +1,8 @@
 export interface IBar {
+  body: IBody[];
+}
+
+interface IBody {
   id: number;
   name: string;
   description: string;

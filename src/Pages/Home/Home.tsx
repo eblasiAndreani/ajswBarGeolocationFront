@@ -5,12 +5,11 @@ const Home = ({ bar }) => {
   const itemsBuscaBar = [
     { path: "/", label: "BARES" },
     { path: "/buscar", label: "BUSCAR" },
-    { path: "/login", label: "INGRESAR" },
+    { path: "/login", label: "MI SESION" },
   ];
 
   const itemsBar = [
     { path: "/reserva", label: "RESERVAR" },
-    { path: "/verpedido", label: "VER PEDIDOS" },
     { path: "/volver", label: "VOLVER" },
   ];
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Registrarse from "./Registrarse";
 import Logout from "./Logout";
@@ -9,8 +9,18 @@ const Login = () => {
 
   const [registrar, setRegistrar] = useState(false);
 
+  const validateToken = () => {
+    const isToken = localStorage.getItem("token");
+    setToken(isToken);
+  };
+
+  useEffect(() => {
+    validateToken();
+  }, []);
+
   return (
     <div>
+      validateToken
       {registrar ? (
         <Registrarse setRegistrar={setRegistrar} />
       ) : token ? (
