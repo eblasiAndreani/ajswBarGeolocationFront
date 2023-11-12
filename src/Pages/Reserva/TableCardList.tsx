@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ITable } from "../../service/Table/types";
 import { Card, Accordion, Row, Col, Container, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 
 // Define la interfaz Group
 interface Group {
@@ -11,6 +13,17 @@ interface Group {
 }
 
 const TableCardList = ({ tables, setSelectedTable }) => {
+  const [idUser, setIdUser] = useState(0);
+  const [table, setTable] = useState(null);
+  const [chair, setChair] = useState(0);
+  const navigate = useNavigate(); // Obtiene la función de navegación
+
+  const getId = () => {
+    const isToken = localStorage.getItem("token");
+    const decodedToken = jwtDecode(isToken);
+    return decodedToken.jti;
+  };
+
   // Declarar la función groupTablesByChair antes de usarla
   function groupTablesByChair(tables: ITable[]): Group[] {
     const groups = {};
@@ -34,17 +47,38 @@ const TableCardList = ({ tables, setSelectedTable }) => {
     return Object.values(groups);
   }
 
-  function handleButtonClick(availableTables) {
-    let table = availableTables[0];
-    let chair = table.chair;
-    console.log(chair);
-    Swal.fire({
-      title: "Ya tenes una mesa!",
-      text: "Contas con " + chair + " lugares",
-      icon: "success",
-      confirmButtonText: "ok",
-    });
-    setSelectedTable(table);
+  useEffect(() => {
+    if (table !== null) {
+      // Resto de tu lógica después de actualizar idUser
+      if (idUser > 0) {
+        Swal.fire({
+          title: "Ya tenes una mesa!",
+          text: "Contas con " + chair + " lugares",
+          icon: "success",
+          confirmButtonText: "ok",
+        });
+        setSelectedTable(table);
+      } else {
+        Swal.fire({
+          title: "Oye!",
+          text: "Debes loguearte primero",
+          icon: "error",
+          confirmButtonText: "ok",
+        });
+        navigate("/login");
+      }
+    }
+  }, [idUser, table, chair]);
+
+  function handleButtonClick(availableTables, chair) {
+    const id = getId(); // Obtener el id
+    // Verificar si id es un número válido mayor que 0
+    const parsedId = parseInt(id, 10);
+    const validId = !isNaN(parsedId) && parsedId > 0 ? parsedId : 0;
+    // Establecer idUser
+    setIdUser(validId);
+    setTable(availableTables[0]);
+    setChair(chair);
   }
 
   // Lógica para agrupar por el atributo "chair"
@@ -62,7 +96,12 @@ const TableCardList = ({ tables, setSelectedTable }) => {
                     {group.availableTables.length > 0 ? (
                       <Button
                         variant="success"
-                        onClick={() => handleButtonClick(group.availableTables)}
+                        onClick={() =>
+                          handleButtonClick(
+                            group.availableTables,
+                            group.availableTables[0].chair
+                          )
+                        }
                       >
                         Reservar
                       </Button>

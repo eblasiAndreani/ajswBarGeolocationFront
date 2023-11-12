@@ -14,7 +14,6 @@ class BarService extends ServiceBase {
   }; */
   getAll = async (): Promise<IBar[]> => {
     const { data } = await this.client.get<IBar[]>("getAll");
-    console.log("Esta es la data: ", data);
     return data;
   };
 

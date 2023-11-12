@@ -14,14 +14,12 @@ const Reserva = ({ Bar }) => {
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   // Estado para llevar un registro de la cantidad de cada bebida seleccionada
   const [drinkQuantities, setDrinkQuantities] = useState({});
-  const [idUser, setIdUser] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseTables = await ServiceTable.getTableByBar(Bar.id);
         const responseDrinks = await ServiceDrink.getDrinkByBar(Bar.id);
-        console.log("Este no me trae nada ", Bar.id);
         setTables(responseTables);
         setDrinks(responseDrinks);
       } catch (error) {

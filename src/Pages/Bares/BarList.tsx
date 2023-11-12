@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import CardBar from "../../Common/CardBar/CardBar";
 import LocalizacionService from "../../service/Localizacion/LocalizacionService";
+import Title from "../../Common/Title/Title";
 
 const BarList = ({ bares, updateBar }) => {
   const navigate = useNavigate(); // Obtiene la función de navegación
@@ -29,7 +30,7 @@ const BarList = ({ bares, updateBar }) => {
           />
         ))
       ) : (
-        <p>No hay bares disponibles.</p>
+        <Title text="No hay bares disponibles." />
       )}
     </div>
   );

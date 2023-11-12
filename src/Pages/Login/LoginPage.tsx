@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import ServiceLogin from "../../service/Login/LoginService";
+import Swal from "sweetalert2";
 
 const LoginPage = ({ setToken, setRegistrar }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,12 @@ const LoginPage = ({ setToken, setRegistrar }) => {
       localStorage.setItem("token", token[1]);
       setToken(token[1]);
     } catch (error) {
+      Swal.fire({
+        title: "Ha surgido un error!",
+        text: "Te pedimos disculpas, vuelve a intentarlo",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
       console.error("Error al iniciar sesión:", error);
     }
   };
@@ -43,7 +50,7 @@ const LoginPage = ({ setToken, setRegistrar }) => {
         <Card.Body>
           <h1 style={{ textAlign: "center" }}>Iniciar Sesión</h1>
           <Form>
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-4">
               <Form.Label className="text-white">Ingresar E-Mail</Form.Label>
               <Form.Control
                 type="text"
@@ -51,13 +58,10 @@ const LoginPage = ({ setToken, setRegistrar }) => {
                 placeholder="name@example.com"
                 onChange={handleInputChange}
               />
-              <Form.Label htmlFor="inputPassword5" className="text-white">
-                Password
-              </Form.Label>
+              <Form.Label className="text-white">Password</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
-                id="inputPassword5"
                 aria-describedby="passwordHelpBlock"
                 onChange={handleInputChange}
               />

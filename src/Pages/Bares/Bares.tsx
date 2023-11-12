@@ -23,7 +23,6 @@ const Bares = ({ updateBar }) => {
   return (
     <body>
       <div className="pageBares">
-        <Title text="Todos los bares" />
         <BarList bares={bares} updateBar={updateBar}></BarList>
       </div>
     </body>

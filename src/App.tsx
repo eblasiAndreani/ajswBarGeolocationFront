@@ -9,7 +9,6 @@ import Bares from "./Pages/Bares/Bares";
 import Buscar from "./Pages/Buscar/Buscar";
 import Volver from "./Pages/Volver/Volver";
 import logo from "./Pages/Home/logo";
-import VerTragos from "./Pages/VerPedido/VerPedido";
 import VerPedido from "./Pages/VerPedido/VerPedido";
 
 function App() {

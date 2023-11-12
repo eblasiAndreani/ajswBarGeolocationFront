@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import ServiceUser from "../../service/User/UserService";
+import Swal from "sweetalert2";
 
 const Registrarse = ({ setRegistrar }) => {
   const [formData, setFormData] = useState({
@@ -21,15 +22,27 @@ const Registrarse = ({ setRegistrar }) => {
 
   const handleRegistrarse = async () => {
     try {
-      const response = await ServiceUser.autenticacion(formData);
+      await ServiceUser.autenticacion(formData);
+      Swal.fire({
+        title: "Genial!!",
+        text: "Ya tienes un usuario, inicia sesion",
+        icon: "success",
+        confirmButtonText: "ok",
+      });
     } catch (error) {
       console.error("Error al realizar la llamada", error);
+      Swal.fire({
+        title: "Ha surgido un error!",
+        text: "Te pedimos disculpas, vuelve a intentarlo",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
     }
     setRegistrar(false);
   };
 
   const handleAtras = async () => {
-    window.history.back();
+    setRegistrar(false);
   };
 
   return (
@@ -41,48 +54,29 @@ const Registrarse = ({ setRegistrar }) => {
         <Card.Body>
           <h1 style={{ textAlign: "center" }}>Registrarse</h1>
           <Form>
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
-              <Form.Label
-                controlId="exampleForm.ControlInput1"
-                className="text-white"
-              >
-                Nombre
-              </Form.Label>
+            <Form.Group className="mb-4">
+              <Form.Label className="text-white">Nombre</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
                 placeholder="nombre"
                 onChange={handleInputChange}
               />
-              <Form.Label
-                controlId="exampleForm.ControlInput1"
-                className="text-white"
-              >
-                Apellido
-              </Form.Label>
+              <Form.Label className="text-white">Apellido</Form.Label>
               <Form.Control
                 type="text"
                 name="surname"
                 placeholder="apellido"
                 onChange={handleInputChange}
               />
-              <Form.Label
-                controlId="exampleForm.ControlInput1"
-                className="text-white"
-              >
-                User
-              </Form.Label>
+              <Form.Label className="text-white">User</Form.Label>
               <Form.Control
                 type="text"
                 name="user"
                 placeholder="user"
                 onChange={handleInputChange}
               />
-              <Form.Label
-                controlId="exampleForm.ControlInput1"
-                htmlFor="inputPassword5"
-                className="text-white"
-              >
+              <Form.Label htmlFor="inputPassword5" className="text-white">
                 Password
               </Form.Label>
               <Form.Control
