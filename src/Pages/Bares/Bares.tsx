@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Bares.css";
-import Title from "../../Common/Title/Title";
 import ServiceBar from "../../service/Bar/BarService";
 import BarList from "./BarList";
 

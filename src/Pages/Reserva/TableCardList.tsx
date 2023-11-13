@@ -20,8 +20,11 @@ const TableCardList = ({ tables, setSelectedTable }) => {
 
   const getId = () => {
     const isToken = localStorage.getItem("token");
-    const decodedToken = jwtDecode(isToken);
-    return decodedToken.jti;
+    if (isToken != null) {
+      return jwtDecode(isToken).jti;
+    } else {
+      return "0";
+    }
   };
 
   // Declarar la función groupTablesByChair antes de usarla

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Registrarse from "./Registrarse";
 import Logout from "./Logout";
 import LoginPage from "./LoginPage";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [token, setToken] = useState(null);

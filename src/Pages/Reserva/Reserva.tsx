@@ -6,14 +6,28 @@ import ServiceDrink from "../../service/Drink/Drink.Service";
 import DrinkCardList from "./DrinkCardList";
 import { Card, Accordion, Row, Container, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import ServicePayment from "../../service/Payment/PaymentService";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import ServiceOrder from "../../service/OrderService/OrderService";
+import { jwtDecode } from "jwt-decode";
 
 const Reserva = ({ Bar }) => {
   const [tables, setTables] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
   const [selectedDrinks, setSelectedDrinks] = useState([]);
+  const navigate = useNavigate(); // Obtiene la función de navegación
   // Estado para llevar un registro de la cantidad de cada bebida seleccionada
   const [drinkQuantities, setDrinkQuantities] = useState({});
+
+  const getId = () => {
+    const isToken = localStorage.getItem("token");
+    if (isToken != null) {
+      return jwtDecode(isToken).jti;
+    } else {
+      return "0";
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +41,60 @@ const Reserva = ({ Bar }) => {
       }
     };
     fetchData(); // Llama a la función fetchData para obtener los bares cuando el componente se monta
-  }, []);
+    // Obtén la cadena de búsqueda de la URL actual
+    const queryString = window.location.search;
+    if (queryString) {
+      const params = new URLSearchParams(queryString);
+      // Accede a los valores de los parámetros por su nombre
+      const collectionStatus = params.get("collection_status");
+      const paymentId = params.get("payment_id");
+
+      if (collectionStatus === "approved" && paymentId != null) {
+        const orderPayment = {
+          totalPrice: calculateTotal(),
+          description: paymentId,
+        };
+        const fetchData = async () => {
+          try {
+            const response = await ServiceOrder.createPayment(orderPayment);
+            const paymentId = response.body.id;
+            // Recuperar desde localStorage
+            const savedData = localStorage.getItem("reservationData");
+            const parsedData = JSON.parse(savedData);
+            const orderData = {
+              partialPrice: parsedData.total, // ejemplo, establece los valores reales según tu lógica
+              idTable: parseInt(parsedData.tableId),
+              idPayment: paymentId,
+              idUser: parseInt(getId()),
+              drinks: parsedData.sublista,
+            };
+            await ServiceOrder.createOrder(orderData);
+            console.log("La creacion fue exitosa");
+          } catch (error) {
+            console.error("Error al realizar la llamada", error);
+          }
+        };
+        fetchData();
+
+        Swal.fire({
+          title: "Genial ya tenes tu reserva",
+          text: "Puedes ver el estado desde tu sesion",
+          icon: "success",
+          confirmButtonText: "ok",
+        });
+        navigate("/login");
+      } else {
+        Swal.fire({
+          title: "El pago no se genero correctamente",
+          text: "Te pedimos disculpas, vuelve a intentarlo",
+          icon: "error",
+          confirmButtonText: "ok",
+        });
+        navigate("/");
+      }
+    }
+    // Crea un objeto URLSearchParams para analizar la cadena de búsqueda
+  }, [selectedTable]);
 
   // Función para agregar una bebida a la lista de bebidas seleccionadas
   const addDrinkToSelectedList = (drink) => {
@@ -161,9 +228,30 @@ const Reserva = ({ Bar }) => {
         confirmButtonText: "ok",
       });
     } else {
-      alert("Vas a finalizar tu compra el total es de " + calculateTotal());
+      // Guardar en localStorage
+      const dataToSave = {
+        tableId: selectedTable.id,
+        total: calculateTotal(),
+        sublista: selectedDrinks.map((item) => ({
+          drink: parseInt(item.id),
+          amount: drinkQuantities[item.id] || 1,
+        })),
+      };
+      localStorage.setItem("reservationData", JSON.stringify(dataToSave));
+      realizarPago();
     }
   }
+
+  const realizarPago = async () => {
+    try {
+      const response = await ServicePayment.getSandBox(calculateTotal(), null);
+      const sandBox = response.body.sandboxInit;
+      // Redirigir al sandbox de Mercado Pago
+      window.location.href = sandBox;
+    } catch (error) {
+      console.error("Error al realizar la llamada", error);
+    }
+  };
 
   return (
     <body>
