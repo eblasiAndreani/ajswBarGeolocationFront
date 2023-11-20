@@ -10,6 +10,7 @@ import ServicePayment from "../../service/Payment/PaymentService";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import ServiceOrder from "../../service/OrderService/OrderService";
 import { jwtDecode } from "jwt-decode";
+import { CustomTokenPayload } from "../Login/Logout";
 
 const Reserva = ({ Bar }) => {
   const [tables, setTables] = useState([]);
@@ -23,9 +24,9 @@ const Reserva = ({ Bar }) => {
   const getId = () => {
     const isToken = localStorage.getItem("token");
     if (isToken != null) {
-      return jwtDecode(isToken).jti;
+      return jwtDecode<CustomTokenPayload>(isToken).User.guiduser;
     } else {
-      return "0";
+      return null;
     }
   };
 
@@ -65,24 +66,31 @@ const Reserva = ({ Bar }) => {
               partialPrice: parsedData.total, // ejemplo, establece los valores reales según tu lógica
               idTable: parseInt(parsedData.tableId),
               idPayment: paymentId,
-              idUser: parseInt(getId()),
+              idUser: getId(),
               drinks: parsedData.sublista,
             };
             await ServiceOrder.createOrder(orderData);
-            console.log("La creacion fue exitosa");
           } catch (error) {
             console.error("Error al realizar la llamada", error);
           }
         };
         fetchData();
 
-        Swal.fire({
-          title: "Genial ya tenes tu reserva",
-          text: "Puedes ver el estado desde tu sesion",
-          icon: "success",
-          confirmButtonText: "ok",
-        });
-        navigate("/login");
+        setTimeout(() => {
+          Swal.fire({
+            title: "Genial ya tenes tu reserva",
+            text: "Puedes ver el estado desde tu sesion",
+            icon: "success",
+            confirmButtonText: "ok",
+          });
+          navigate("/login");
+        }, 1000);
+        <div>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p>Loading...</p>
+        </div>;
       } else {
         Swal.fire({
           title: "El pago no se genero correctamente",

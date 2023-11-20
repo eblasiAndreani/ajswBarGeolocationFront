@@ -4,7 +4,27 @@ import Swal from "sweetalert2";
 
 const DrinkCardList = ({ drinks, addDrinkToSelectedList, selectedTable }) => {
   function handleButtonClick(drink) {
+    const name = drink.name;
+    const description = drink.description;
+
     if (selectedTable != null) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: `1 ${name} ${description} mas!!!\nPuedes controlar tu reserva debajo en el resumen `,
+      });
+
       addDrinkToSelectedList(drink);
     } else {
       Swal.fire({
@@ -32,8 +52,8 @@ const DrinkCardList = ({ drinks, addDrinkToSelectedList, selectedTable }) => {
               />
               <Card.Body>
                 <Card.Title>{drink.name}</Card.Title>
-                <Card.Text>{drink.descripcion}</Card.Text>
-                <Card.Text>{drink.price}</Card.Text>
+                <Card.Text>{drink.description}</Card.Text>
+                <Card.Text>Precio por unidad ${drink.price}</Card.Text>
                 <Button
                   variant="success"
                   onClick={() => handleButtonClick(drink)}

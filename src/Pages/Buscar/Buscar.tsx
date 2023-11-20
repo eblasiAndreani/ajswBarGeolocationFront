@@ -4,12 +4,12 @@ import Title from "../../Common/Title/Title";
 import ServiceBar from "../../service/Bar/BarService";
 import Button from "../../Common/Button/Button";
 import BarList from "../Bares/BarList";
-import { Card, Accordion, Row, Col, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const Buscar = ({ updateBar }) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [bares, setBares] = useState([]);
+  const [bares, setBares] = useState(null);
   const [firstTime, setFirstTime] = useState(false);
 
   useEffect(() => {
@@ -19,7 +19,8 @@ const Buscar = ({ updateBar }) => {
         try {
           const response = await ServiceBar.getBarsByLocation(
             latitude,
-            longitude
+            longitude,
+            1
           );
           setBares(response); // Actualiza el estado con la lista de bares
           setFirstTime(true);
@@ -52,7 +53,7 @@ const Buscar = ({ updateBar }) => {
           className="mi-clase-personalizada"
         />
       </div>
-      {bares.length > 0 ? (
+      {bares ? (
         <BarList bares={bares} updateBar={updateBar}></BarList>
       ) : firstTime ? (
         <Card style={{ width: "61rem" }} className="bg-primary text-white">

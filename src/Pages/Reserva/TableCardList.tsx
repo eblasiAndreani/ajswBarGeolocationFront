@@ -55,8 +55,8 @@ const TableCardList = ({ tables, setSelectedTable }) => {
       // Resto de tu lógica después de actualizar idUser
       if (idUser > 0) {
         Swal.fire({
-          title: "Ya tenes una mesa!",
-          text: "Contas con " + chair + " lugares",
+          title: "Contas con " + chair + " lugares",
+          text: "Tu reserva tiene una ventana de tiempo de una hora a partir del pago. Después de este período, la disponibilidad de mesa dependerá de la capacidad del local en el momento de tu llegada.",
           icon: "success",
           confirmButtonText: "ok",
         });

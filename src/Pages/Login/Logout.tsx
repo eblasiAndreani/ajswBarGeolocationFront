@@ -1,7 +1,37 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import { jwtDecode } from "jwt-decode";
 import VerPedido from "../VerPedido/VerPedido";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+
+export interface CustomTokenPayload {
+  jti: string;
+  sub: string;
+  authorities: string[];
+  User: {
+    id: number;
+    user: string;
+    pass: string;
+    nombre: string;
+    apellido: string;
+    rol: string;
+    guiduser: string;
+  };
+  iat: number;
+  exp: number;
+}
+
+// Define la interfaz personalizada
+export interface CustomTokenPayload extends JwtPayload {
+  User: {
+    id: number;
+    user: string;
+    pass: string;
+    nombre: string;
+    apellido: string;
+    rol: string;
+    guiduser: string;
+  };
+}
 
 const Logout = ({ setToken, token }) => {
   const handleLogout = () => {
@@ -11,8 +41,11 @@ const Logout = ({ setToken, token }) => {
   };
 
   const name = () => {
-    const decodedToken = jwtDecode(token);
-    return decodedToken.sub;
+    // Usa la interfaz personalizada al decodificar el token
+    const decodedToken = jwtDecode<CustomTokenPayload>(token);
+
+    // Accede a las propiedades de User
+    return decodedToken.User.nombre + " " + decodedToken.User.apellido;
   };
 
   return (

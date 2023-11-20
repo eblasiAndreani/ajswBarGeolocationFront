@@ -10,7 +10,11 @@ const CardBar = ({ title, address, description, imageUrl, onClick }) => {
   };
   return (
     <div className="custom-card" onClick={handleCardClick}>
-      <img src={imageUrl} alt={title} />
+      <img
+        src={imageUrl}
+        alt={title}
+        style={{ width: "370px", height: "300px" }}
+      />
       <div className="card-content">
         <h2>{title}</h2>
         <p>{address}</p>

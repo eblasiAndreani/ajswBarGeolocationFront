@@ -1,6 +1,7 @@
 import React from "react";
 import Title from "../../Common/Title/Title";
 import { Card, Container, Button } from "react-bootstrap";
+import LocalizacionService from "../../service/Localizacion/LocalizacionService";
 
 const PedidosList = ({ pedido }) => {
   return (
@@ -14,38 +15,69 @@ const PedidosList = ({ pedido }) => {
               marginBottom: "1rem",
             }}
           >
-            {pedido.body.map((order) => (
-              <Card
-                key={order.id}
-                className={`bg-${
-                  order.idTable.dispose ? "success text-white" : "white"
-                }`}
-                style={{
-                  width: "90rem",
-                  margin: "1rem",
-                }}
-              >
-                <Card.Body>
-                  <Card.Title>Pedido: {order.id}</Card.Title>
-                  <Card.Text>
-                    Pagado: ${order.partialPrice}
-                    {order.idTable.dispose
-                      ? "   ---Los estamos esperando---"
-                      : null}
-                  </Card.Text>
-                </Card.Body>
+            {pedido.body
+              .slice()
+              .reverse()
+              .map((order) => (
+                <Card
+                  key={order.id}
+                  className={`bg-${
+                    order.idTable.dispose ? "white" : "success text-white"
+                  }`}
+                  style={{
+                    width: "90rem",
+                    margin: "1rem",
+                  }}
+                >
+                  <Card.Body>
+                    <Card.Title
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        fontSize: "40px",
+                        margin: "0 100px",
+                      }}
+                    >
+                      <span style={{ order: 1 }}>
+                        Reserva: {order.id} - 18/11/2023 17:53hs
+                      </span>
+                      <span style={{ order: 2 }}>
+                        Bar: {order.idTable.bar.name}
+                      </span>
+                    </Card.Title>
+                    <Card.Text
+                      style={{
+                        padding: "0 50px",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "25px",
+                        }}
+                      >
+                        <LocalizacionService
+                          lat={order.idTable.bar.latitude}
+                          lng={order.idTable.bar.longitude}
+                        />
+                        {order.idTable.dispose
+                          ? null
+                          : "   ---Los estamos esperando---"}
+                      </span>
+                    </Card.Text>
+                  </Card.Body>
 
-                {/* Contenedor con display: flex para las bebidas */}
-                {/* <div style={{ display: "flex", flexWrap: "wrap" }}>
-                    {order.drink.map((drink, drinkIndex) => (
+                  {/* Contenedor con display: flex para las bebidas */}
+                  <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    {order.drinks.map((drink, drinkIndex) => (
                       <Card
                         key={drinkIndex}
-                        style={{ width: "20rem", margin: "1rem" }}
+                        style={{ width: "12.2rem", margin: "1rem" }}
                       >
                         <Card.Img
                           variant="top"
                           src={drink.image}
-                          style={{ width: "20rem", height: "20rem" }}
+                          style={{ width: "12rem", height: "12rem" }}
                         />
                         <Card.Body>
                           <Card.Title>{drink.name}</Card.Title>
@@ -60,13 +92,15 @@ const PedidosList = ({ pedido }) => {
                         </Card.Body>
                       </Card>
                     ))}
-                  </div> */}
-              </Card>
-            ))}
+                  </div>
+                </Card>
+              ))}
           </Container>
         </div>
       ) : (
-        <Title text="No hay bares disponibles." />
+        <body>
+          <Title text="No tienes reservas que mostrar" />
+        </body>
       )}
     </div>
   );

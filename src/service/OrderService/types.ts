@@ -2,7 +2,7 @@ export interface IOrder {
   partialPrice: number;
   idTable: number;
   idPayment: number;
-  idUser: number;
+  idUser: string;
   drinks: IDrink[];
 }
 
@@ -35,7 +35,8 @@ export interface IOrderBody {
   partialPrice: number;
   idTable: ITable;
   idPayment: number;
-  idUser: number;
+  idUser: string;
+  drinks: IDrinkDto[];
 }
 
 interface ITable {
@@ -50,4 +51,13 @@ interface IBar {
   name: string;
   description: string;
   logo: string;
+}
+
+interface IDrinkDto {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  amount: number;
 }
