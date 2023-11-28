@@ -3,6 +3,22 @@ import Title from "../../Common/Title/Title";
 import { Card, Container, Button } from "react-bootstrap";
 import LocalizacionService from "../../service/Localizacion/LocalizacionService";
 
+// Función para formatear la fecha
+function formatFechaAlta(fechaAlta: string) {
+  const fecha = new Date(fechaAlta);
+
+  // Formato personalizado para mostrar solo hasta el minuto
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  return fecha.toLocaleDateString("es-ES", options);
+}
+
 const PedidosList = ({ pedido }) => {
   return (
     <div className="bar-list">
@@ -21,9 +37,6 @@ const PedidosList = ({ pedido }) => {
               .map((order) => (
                 <Card
                   key={order.id}
-                  className={`bg-${
-                    order.idTable.dispose ? "white" : "success text-white"
-                  }`}
                   style={{
                     width: "90rem",
                     margin: "1rem",
@@ -39,7 +52,7 @@ const PedidosList = ({ pedido }) => {
                       }}
                     >
                       <span style={{ order: 1 }}>
-                        Reserva: {order.id} - 18/11/2023 17:53hs
+                        Reserva: {order.id} - {formatFechaAlta(order.fechaAlta)}
                       </span>
                       <span style={{ order: 2 }}>
                         Bar: {order.idTable.bar.name}
@@ -60,9 +73,6 @@ const PedidosList = ({ pedido }) => {
                           lat={order.idTable.bar.latitude}
                           lng={order.idTable.bar.longitude}
                         />
-                        {order.idTable.dispose
-                          ? null
-                          : "   ---Los estamos esperando---"}
                       </span>
                     </Card.Text>
                   </Card.Body>

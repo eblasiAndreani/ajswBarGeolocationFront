@@ -7,7 +7,7 @@ class LoginService extends ServiceBase {
   }
 
   autenticacion = async (user, pass): Promise<IRespo> => {
-    const { data } = await this.client.post<IRespo>("", {
+    const { data } = await this.client.post<IRespo>("/postAuth", {
       user,
       pass,
     });

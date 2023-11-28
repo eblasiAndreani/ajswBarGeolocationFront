@@ -21,7 +21,9 @@ const VerPedido = () => {
   const getId = () => {
     const isToken = localStorage.getItem("token");
     if (isToken != null) {
-      return jwtDecode<CustomTokenPayload>(isToken).User.guiduser;
+      let guidUser = jwtDecode<CustomTokenPayload>(isToken).User.guiduser;
+      console.log("Este es el guidUser", guidUser);
+      return guidUser;
     } else {
       return null;
     }

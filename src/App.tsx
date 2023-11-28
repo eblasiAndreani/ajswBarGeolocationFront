@@ -10,6 +10,7 @@ import Buscar from "./Pages/Buscar/Buscar";
 import Volver from "./Pages/Volver/Volver";
 import logo from "./Pages/Home/logo";
 import VerPedido from "./Pages/VerPedido/VerPedido";
+import Admin from "./Pages/Admin/Admin";
 
 function App() {
   const barDefault = {
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Bares updateBar={updateBar} />} />
         <Route path="/localizacion" element={<Localizacion />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/reserva" element={<Reserva Bar={bar} />} />
         <Route path="/verpedido" element={<VerPedido />} />
         <Route path="/login" element={<Login />} />

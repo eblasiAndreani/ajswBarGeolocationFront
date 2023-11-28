@@ -1,5 +1,6 @@
 export interface IOrder {
   partialPrice: number;
+  fechaAlta: Date;
   idTable: number;
   idPayment: number;
   idUser: string;
