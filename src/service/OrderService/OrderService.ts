@@ -6,6 +6,12 @@ class OrderService extends ServiceBase {
     super("http://localhost:8080", "/v1/gateway/");
   }
 
+  private getAuthToken() {
+    // Obtener el token almacenado en local storage
+    const token = localStorage.getItem("token");
+    return token ? `Bearer ${token}` : "";
+  }
+
   createOrder = async ({
     partialPrice,
     idTable,
@@ -13,27 +19,54 @@ class OrderService extends ServiceBase {
     idUser,
     drinks,
   }): Promise<IOrder> => {
-    const { data } = await this.client.post<IOrder>("order/create", {
-      partialPrice,
-      idTable,
-      idPayment,
-      idUser,
-      drinks,
-    });
+    const token = this.getAuthToken();
+    const { data } = await this.client.post<IOrder>(
+      "order/create",
+      {
+        partialPrice,
+        idTable,
+        idPayment,
+        idUser,
+        drinks,
+      },
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return data;
   };
 
   createPayment = async ({ totalPrice, description }): Promise<IRespoBody> => {
-    const { data } = await this.client.post<IRespoBody>("payment/create", {
-      totalPrice,
-      description,
-    });
+    const token = this.getAuthToken();
+    const { data } = await this.client.post<IRespoBody>(
+      "payment/create",
+      {
+        totalPrice,
+        description,
+      },
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return data;
   };
 
   getByUserId = async (id): Promise<IOrderRespo[]> => {
+    const token = this.getAuthToken();
     const { data } = await this.client.get<IOrderRespo[]>(
-      `order/getByUser/${id}`
+      `order/getByUser/${id}`,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
     );
     return data;
   };

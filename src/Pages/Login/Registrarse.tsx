@@ -9,7 +9,7 @@ const Registrarse = ({ setRegistrar }) => {
     surname: "",
     user: "",
     pass: "",
-    role: "3",
+    role: "2",
   });
 
   const handleInputChange = (e) => {
